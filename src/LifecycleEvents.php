@@ -41,6 +41,15 @@ class LifecycleEvents
 		);
 	}
 
+	public function __call($name, $arguments)
+	{
+		$this->fire(
+			$name,
+			array_pop($arguments), // extra params
+			array_pop($arguments) // user
+		);
+	}
+
 	private function getEventUser($overrideUser)
 	{
 		if (!empty($overrideUser)) {

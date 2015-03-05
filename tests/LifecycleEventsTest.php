@@ -144,4 +144,15 @@ class LifecycleEventsTest extends \PHPUnit_Framework_TestCase
 		$this->setExpectedException('DelfiNet\LifecycleEvents\Exception\IdRequiredException');
 		$drip->fire('Registered');
 	}
+
+	public function testFireMissingMethod()
+	{
+		$user = array('id' => 123, 'email' => 'user@example.com');
+		$drip = new LifecycleEvents($this->adapter, $user);
+
+		$this->adapter->expects($this->once())
+					  ->method('fire')
+					  ->with('Registered', $user, array());
+		$drip->Registered();
+	}
 }

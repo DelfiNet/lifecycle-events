@@ -66,6 +66,22 @@ $lifecycle->fire('Registered', array('LifecyleEvents' => 'Success'));
 ```
 
 
+Magic Method Events
+-------------------
+
+As a shortcut for firing events, non-existing methods are treated as calls fire(),
+with the case of the name is preserved.
+
+For example, the following would be the equivalant of calling `fire('registered')`.
+```
+$lifecycle->Registered();
+```
+
+To call with extra parameters:
+```
+$lifecycle->Registered(array('extra' => 'params'));
+```
+
 Testing
 -------
 
