@@ -36,13 +36,6 @@ class DripAdapterTest extends \PHPUnit_Framework_TestCase
 		return $adapter;
 	}
 
-	private function getMockApi()
-	{
-		return $api = $this->getMockBuilder('Drip_Api')
-						   ->disableOriginalConstructor()
-						   ->getMock();
-	}
-
 	public function testIdentifyNewUserException()
 	{
 		$api = $this->getMockApi();
@@ -100,5 +93,12 @@ class DripAdapterTest extends \PHPUnit_Framework_TestCase
 		$this->setExpectedException('DelfiNet\LifecycleEvents\Exception\ServiceException', 'Message');
 
 		$adapter->fire('Error', array('email' => 'exception@example.com'), array());
+	}
+
+	private function getMockApi()
+	{
+		return $api = $this->getMockBuilder('Drip_Api')
+						   ->disableOriginalConstructor()
+						   ->getMock();
 	}
 }

@@ -18,10 +18,12 @@
   "require-dev": {
     "phpunit/phpunit": "~4.5",
     "squizlabs/php_codesniffer": "2.*",
-    "drip-email/drip-php": "1.0"
+    "drip-email/drip-php": "1.0",
+    "userscape/customerio": "~1.0.0"
   },
   "suggest": {
-    "drip-email/drip-php": "For sending events to Drip."
+    "drip-email/drip-php": "For sending events to Drip.",
+    "userscape/customerio": "For sending events to CustomerIO."
   },
   "autoload": {
     "psr-4": {"DelfiNet\\LifecycleEvents\\": "src/"},

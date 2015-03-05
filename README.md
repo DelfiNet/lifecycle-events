@@ -1,16 +1,58 @@
-LifecycleEvents - A consistent interface to drip email services
+LifecycleEvents - A consistent interface to email services
 ==========================================================
 
-Installation
-------------
+Installation / Usage
+--------------------
 
-1. Add `delfinet/lifecycle-events` to your composer.json file.
-2. Run `composer update`
+1. Add `delfinet/lifecycle-events` and service library (see below) to your composer.json file requirements.
+3. Run `composer update`
+
+
+Usage with Customer.io (http://customer.io/)
+--------------------------------------------
+
+Add `"userscape/customerio": "~1.0.0"` to your composer.json requirements.
+
+Sample usage adding a user and firing an event:
+
+```
+use DelfiNet\LifecycleEvents\Adapter\CustomerioAdapter;
+use DelfiNet\LifecycleEvents\LifecycleEvents;
+
+$api = new Customerio\Api('site id', 'api secret', new Customerio\Request);
+$adapter = new CustomerioAdapter($api);
+
+$lifecycle = new LifecycleEvents($adapter);
+$lifecycle->identifyExistingUser(array(), array('id' => '123', 'email' => 'scott+drip@delfi-net.com'));
+$lifecycle->fire('Tested', array('LifecyleEvents' => 'Success'));
+```
 
 
 Usage with Drip (https://www.getdrip.com/)
------
+------------------------------------------
 
+Add the following to your composer.json repositories:
+
+```
+"drip-email-php-api": {
+  "type": "package",
+  "package": {
+	"name": "drip-email/drip-php",
+	"version": "1.0",
+	"source": {
+	  "url": "git@github.com:DripEmail/drip-php.git",
+	  "type": "git",
+	  "reference": "origin/master"
+	}
+  }
+}
+```
+
+and then add `"drip-email/drip-php": "1.0"` to requirements.
+
+Sample usage adding a user and firing an event:
+
+```
 use DelfiNet\LifecycleEvents\Adapter\DripAdapter;
 use DelfiNet\LifecycleEvents\LifecycleEvents;
 
@@ -21,6 +63,7 @@ $adapter = new DripAdapter($accountId, $dripApi);
 $lifecycle = new LifecycleEvents($adapter);
 $lifecycle->identifyNewUser(array('Random' => 'Property'), array('id' => 123, 'email' => 'drip@example.com'));
 $lifecycle->fire('Registered', array('LifecyleEvents' => 'Success'));
+```
 
 
 Testing
