@@ -11,6 +11,9 @@
           "url": "git@github.com:DripEmail/drip-php.git",
           "type": "git",
           "reference": "origin/master"
+        },
+        "autoload": {
+          "classmap": ["Drip_API.class.php"]
         }
       }
     }
@@ -26,8 +29,7 @@
     "userscape/customerio": "For sending events to CustomerIO."
   },
   "autoload": {
-    "psr-4": {"DelfiNet\\LifecycleEvents\\": "src/"},
-    "classmap": ["vendor/drip-email/drip-php/"]
+    "psr-4": {"DelfiNet\\LifecycleEvents\\": "src/"}
   },
   "authors": [
     {

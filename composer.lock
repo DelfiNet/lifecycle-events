@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "11e2a627e85306901ac121e2bf2e0afa",
+    "hash": "ba5c6065fc6bbf57b608c1b9bf88b6d7",
     "packages": [],
     "packages-dev": [
         {
@@ -69,7 +69,12 @@
                 "url": "git@github.com:DripEmail/drip-php.git",
                 "reference": "origin/master"
             },
-            "type": "library"
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Drip_API.class.php"
+                ]
+            }
         },
         {
             "name": "guzzle/guzzle",

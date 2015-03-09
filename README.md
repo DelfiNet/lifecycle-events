@@ -43,6 +43,9 @@ Add the following to your composer.json repositories:
 	  "url": "git@github.com:DripEmail/drip-php.git",
 	  "type": "git",
 	  "reference": "origin/master"
+	},
+	"autoload": {
+	  "classmap": ["Drip_API.class.php"]
 	}
   }
 }
