@@ -169,7 +169,7 @@ Magic Method Events
 As a shortcut for firing events, non-existing methods are treated as calls fire(),
 with the case of the name is preserved.
 
-For example, the following would be the equivalant of calling `fire('registered')`.
+For example, the following would be the equivalent of calling `fire('registered')`.
 ```
 $lifecycle->Registered();
 ```
