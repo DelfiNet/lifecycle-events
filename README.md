@@ -8,8 +8,7 @@ Installation / Usage
 3. Run `composer update`
 
 
-Usage with Customer.io (http://customer.io/)
---------------------------------------------
+### Usage with Customer.io (http://customer.io/) ###
 
 Add `"userscape/customerio": "~1.0.0"` to your composer.json requirements.
 
@@ -28,8 +27,8 @@ $lifecycle->fire('Tested', array('LifecyleEvents' => 'Success'));
 ```
 
 
-Usage with Drip (https://www.getdrip.com/)
-------------------------------------------
+
+### Usage with Drip (https://www.getdrip.com/) ###
 
 Add the following to your composer.json repositories:
 
@@ -66,6 +65,101 @@ $adapter = new DripAdapter($accountId, $dripApi);
 $lifecycle = new LifecycleEvents($adapter);
 $lifecycle->identifyNewUser(array('Random' => 'Property'), array('id' => 123, 'email' => 'drip@example.com'));
 $lifecycle->fire('Registered', array('LifecyleEvents' => 'Success'));
+```
+
+
+Laravel 4
+---------
+
+### Installation ###
+
+Include LifecycleEvents as a dependency in composer.json:
+
+```
+"delfinet/lifecycle-events": "dev-master",
+```
+
+Include the relevant service API class (Drip, Customerio, etc.) in composer.json
+
+Run `composer install`
+
+Add the relevant service provider to your provider array in `config/app.php`
+
+```
+'providers' => array(
+	'DelfiNet\LifecycleEvents\Laravel\CustomerioServiceProvider',
+)
+```
+
+
+### Configuration ###
+
+Add configuration to your `config/services.php` file for the service that you will be using
+and the environment variables in `.env.php`.
+
+
+#### Drip ####
+
+In `config/services.php`:
+
+```
+<?php
+return array(
+	'drip' => array(
+    		'account_id' => $_ENV['DRIP_ACCOUNT_ID'],
+    		'api_token' => $_ENV['DRIP_API_TOKEN'],
+    	),
+);
+``
+
+In `.env.php`:
+
+```
+<?php
+
+return array(
+	'DRIP_ACCOUNT_ID' => "account id",
+	'DRIP_API_TOKEN' => "api token",
+);
+
+
+```
+
+#### Customer.io ####
+
+In `config/services.php`:
+
+```
+return array(
+	'customerio' => array(
+		'site_id' => $_ENV['CUSTOMERIO_SITE_ID'],
+		'api_secret' => $_ENV['CUSTOMERIO_API_SECRET'],
+	),
+);
+```
+
+In `.env.php`:
+
+```
+<?php
+
+return array(
+	'CUSTOMERIO_SITE_ID' => "side id",
+	'CUSTOMERIO_API_SECRET' => "api secret",
+);
+```
+
+
+Usage
+-----
+
+Because the service provider does not set a user when creating LifecycleEvents,
+user info will need to be specified the first time one of its methods is called.
+
+```
+$lifecycle = App::make('LifecycleEvents');
+$lifecycle->identifyUser(array(), array('id' => 123, 'email' => 'laravel@example.com'));
+$lifecycle->fire('Registered');
 ```
 
 
