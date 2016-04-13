@@ -110,7 +110,7 @@ return array(
     		'api_token' => $_ENV['DRIP_API_TOKEN'],
     	),
 );
-``
+```
 
 In `.env.php`:
 
